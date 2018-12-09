@@ -14,7 +14,7 @@
 //============================================================================
 
 #include<iostream>
-#include "DataType.hpp"
+#include "../Common/DataType.hpp"
 
 #ifndef __SINGLY_LINK_LIST__
 #define __SINGLY_LINK_LIST__

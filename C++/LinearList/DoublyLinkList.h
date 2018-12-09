@@ -15,7 +15,7 @@
 //============================================================================
 
 #include<iostream>
-#include "DataType.hpp"
+#include "../Common/DataType.hpp"
 
 #ifndef __DOUBLY_LINK_LIST__
 #define __DOUBLY_LINK_LIST__

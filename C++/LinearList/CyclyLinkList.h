@@ -1,5 +1,5 @@
 #include <ostream>
-#include "DataType.hpp"
+#include "../Common/DataType.hpp"
 
 #ifndef __CYCLY_LINK_LIST__
 #define __CYCLY_LINK_LIST__
