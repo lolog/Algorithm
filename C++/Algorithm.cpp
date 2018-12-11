@@ -11,11 +11,13 @@
 #include "LinearList/LinearList.cpp"
 #include "Stack/Stack.cpp"
 #include "Queue/Queue.cpp"
+#include "Matrix/Matrix.cpp"
 
 using namespace std;
 using linear_list::LinearList;
 using stack::Stack;
 using queue::Queue;
+using matrix::Matrix;
 
 int main()
 {
@@ -83,6 +85,18 @@ int main()
 			queue->doublyLinkQueue();
 		}
 		delete queue;
+	}
+
+	// List
+	index_list_ = str_func.find("Matrix");
+	if(index_list_ != str_func.npos)
+	{
+		Matrix* matrix = new Matrix();
+		if(0 == strcasecmp("SparseMatrix", str_func.c_str()))
+		{
+			matrix->sparseMatrix();
+		}
+		delete matrix;
 	}
 	return 0;
 }

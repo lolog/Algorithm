@@ -37,4 +37,27 @@ struct DoublyNode
 	}
 };
 
+template<typename T>
+struct Tuple
+{
+	int row;
+	int column;
+
+	T value;
+
+	Tuple(int row, int column, T value)
+	:row(row), column(column), value(value)
+	{
+	}
+
+	Tuple<T>& operator = (const Tuple<T>& tuple)
+	{
+		row    = tuple.row;
+		column = tuple.column;
+		value  = tuple.value;
+
+		return *this;
+	}
+};
+
 #endif
