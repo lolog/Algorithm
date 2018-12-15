@@ -1,181 +1,185 @@
 #include <malloc.h>
 #include "SequentList.h"
 
-template<typename T>
-squent_list::SeqentList<T>::SeqentList()
-{
-	init(defaultCapacity);
-}
+namespace squent_list{
 
-template<typename T>
-squent_list::SeqentList<T>::SeqentList(int capacity)
-{
-	init(capacity);
-}
-
-template<typename T>
-void squent_list::SeqentList<T>::init(int capacity)
-{
-	mFactor   = 1.5f;
-	mSize     = 0;
-	mCapacity = capacity;
-
-	pDatas    = (T*) malloc(capacity * sizeof(T));
-}
-
-template<typename T>
-void squent_list::SeqentList<T>::extendCapacity(int capacity)
-{
-	T * p_datas = (T*) malloc(sizeof(T) * capacity);
-	for(int i=0; i<mSize; i++) {
-		p_datas[i] = pDatas[i];
-	}
-	free(pDatas);
-
-	pDatas = p_datas;
-}
-
-template<typename T>
-squent_list::SeqentList<T>::~SeqentList()
-{
-	delete pDatas;
-}
-
-template<typename T>
-int squent_list::SeqentList<T>::size() const
-{
-	return mSize;
-}
-
-template<typename T>
-int squent_list::SeqentList<T>::capacity() const
-{
-	return mCapacity;
-}
-
-template<typename T>
-bool squent_list::SeqentList<T>::add(const T& t)
-{
-	if(mSize < mCapacity)
+	template<typename T>
+	SeqentList<T>::SeqentList()
 	{
-		pDatas[mSize] = t;
-
-		mSize++;
+		init(defaultCapacity);
 	}
-	else
+
+	template<typename T>
+	SeqentList<T>::SeqentList(int capacity)
 	{
-		mCapacity = mCapacity * mFactor;
-		// extend capacity
-		extendCapacity(mCapacity);
-
-		// add element
-		pDatas[mSize] = t;
-
-		mSize++;
+		init(capacity);
 	}
-	return true;
-}
 
-template<typename T>
-bool squent_list::SeqentList<T>::insert(int index, const T& t)
-{
-	if(mCapacity == mSize)
+	template<typename T>
+	void SeqentList<T>::init(int capacity)
 	{
-		mCapacity = mCapacity * mFactor;
-		extendCapacity(mCapacity);
+		mFactor   = 1.5f;
+		mSize     = 0;
+		mCapacity = capacity;
+
+		pDatas    = (T*) malloc(capacity * sizeof(T));
 	}
-	if(index < mSize)
+
+	template<typename T>
+	void SeqentList<T>::extendCapacity(int capacity)
 	{
-		T _temp = pDatas[index];
-		for(int i=mSize; i>index; i--)
-		{
-			pDatas[i] = pDatas[i-1];
+		T * p_datas = (T*) malloc(sizeof(T) * capacity);
+		for(int i=0; i<mSize; i++) {
+			p_datas[i] = pDatas[i];
 		}
+		free(pDatas);
+
+		pDatas = p_datas;
 	}
-	mSize++;
-	pDatas[index] = t;
 
-	return true;
-}
-
-template<typename T>
-bool squent_list::SeqentList<T>::remove(const T& t)
-{
-	bool removed = false;
-	for(int i=0; i<mSize; i++)
+	template<typename T>
+	SeqentList<T>::~SeqentList()
 	{
-		if(t == pDatas[i])
+		delete pDatas;
+	}
+
+	template<typename T>
+	int SeqentList<T>::size() const
+	{
+		return mSize;
+	}
+
+	template<typename T>
+	int SeqentList<T>::capacity() const
+	{
+		return mCapacity;
+	}
+
+	template<typename T>
+	bool SeqentList<T>::add(const T& t)
+	{
+		if(mSize < mCapacity)
 		{
-			// left remove one position
-			for(int j=i; j<mSize-1; j++)
+			pDatas[mSize] = t;
+
+			mSize++;
+		}
+		else
+		{
+			mCapacity = mCapacity * mFactor;
+			// extend capacity
+			extendCapacity(mCapacity);
+
+			// add element
+			pDatas[mSize] = t;
+
+			mSize++;
+		}
+		return true;
+	}
+
+	template<typename T>
+	bool SeqentList<T>::insert(int index, const T& t)
+	{
+		if(mCapacity == mSize)
+		{
+			mCapacity = mCapacity * mFactor;
+			extendCapacity(mCapacity);
+		}
+		if(index < mSize)
+		{
+			T _temp = pDatas[index];
+			for(int i=mSize; i>index; i--)
 			{
-				pDatas[j] = pDatas[j+1];
+				pDatas[i] = pDatas[i-1];
 			}
-			mSize     -= 1;
-			mCapacity -= 1;
-
-			removed = true;
 		}
-	}
-	return removed;
-}
+		mSize++;
+		pDatas[index] = t;
 
-template<typename T>
-int squent_list::SeqentList<T>::find(const T& t)
-{
-	for(int i=0; i<mSize; i++)
+		return true;
+	}
+
+	template<typename T>
+	bool SeqentList<T>::remove(const T& t)
 	{
-		if(t == pDatas[i])
+		bool removed = false;
+		for(int i=0; i<mSize; i++)
 		{
-			return i;
+			if(t == pDatas[i])
+			{
+				// left remove one position
+				for(int j=i; j<mSize-1; j++)
+				{
+					pDatas[j] = pDatas[j+1];
+				}
+				mSize     -= 1;
+				mCapacity -= 1;
+
+				removed = true;
+			}
+		}
+		return removed;
+	}
+
+	template<typename T>
+	int SeqentList<T>::find(const T& t)
+	{
+		for(int i=0; i<mSize; i++)
+		{
+			if(t == pDatas[i])
+			{
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	template<typename T>
+	bool SeqentList<T>::empty() const
+	{
+		return 0 == mSize;
+	}
+
+	template<typename T>
+	const T& SeqentList<T>::get(int index) const
+	{
+		if(index >= mSize)
+		{
+			return NULL;
+		}
+		return pDatas[index];
+	}
+
+	template<typename T>
+	bool SeqentList<T>::set(int index, const T& data)
+	{
+		if(index >= mSize)
+		{
+			return false;
+		}
+
+		pDatas[index] = data;
+
+		return true;
+	}
+
+	template<typename T>
+	void SeqentList<T>::print() const
+	{
+		using namespace std;
+		cout << "SeqentList-->" << endl;
+		cout << "    size     = " << mSize << endl;
+		cout << "    Elements : " << endl;
+		cout << "             ";
+		if(mSize > 0)
+		{
+			cout << pDatas[0];
+		}
+		for(int i=1; i<mSize; i++)
+		{
+			cout << "," << pDatas[i];
 		}
 	}
-	return -1;
-}
 
-template<typename T>
-bool squent_list::SeqentList<T>::empty() const
-{
-	return 0 == mSize;
-}
-
-template<typename T>
-const T& squent_list::SeqentList<T>::get(int index) const
-{
-	if(index >= mSize)
-	{
-		return NULL;
-	}
-	return pDatas[index];
-}
-
-template<typename T>
-bool squent_list::SeqentList<T>::set(int index, const T& data)
-{
-	if(index >= mSize)
-	{
-		return false;
-	}
-
-	pDatas[index] = data;
-
-	return true;
-}
-
-template<typename T>
-void squent_list::SeqentList<T>::print() const
-{
-	using namespace std;
-	cout << "SeqentList-->" << endl;
-	cout << "    size     = " << mSize << endl;
-	cout << "    Elements : " << endl;
-	cout << "             ";
-	if(mSize > 0)
-	{
-		cout << pDatas[0];
-	}
-	for(int i=1; i<mSize; i++)
-	{
-		cout << "," << pDatas[i];
-	}
 }

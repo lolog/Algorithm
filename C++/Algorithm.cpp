@@ -12,12 +12,14 @@
 #include "Stack/Stack.cpp"
 #include "Queue/Queue.cpp"
 #include "Matrix/Matrix.cpp"
+#include "GeneralList/GList.cpp"
 
 using namespace std;
 using linear_list::LinearList;
 using stack::Stack;
 using queue::Queue;
 using matrix::Matrix;
+using g_list::GList;
 
 int main()
 {
@@ -98,5 +100,18 @@ int main()
 		}
 		delete matrix;
 	}
+
+	// List
+	index_list_ = str_func.find("General");
+	if(index_list_ != str_func.npos)
+	{
+		GList* glist = new GList();
+		if(0 == strcasecmp("GeneralList", str_func.c_str()))
+		{
+			glist->generalList();
+		}
+		delete glist;
+	}
+
 	return 0;
 }
