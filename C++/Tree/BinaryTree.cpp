@@ -37,6 +37,7 @@ namespace binary_tree
 		{
 			_insert1(root, t);
 		}
+		mCount++;
 	}
 
 	template<typename T>
@@ -66,6 +67,8 @@ namespace binary_tree
 		rearLeaf->next       = new Link<_BTreeNode>(_node);
 		rearLeaf->next->prev = rearLeaf;
 		rearLeaf             = rearLeaf->next;
+
+		mCount++;
 	}
 
 	template<typename T>
@@ -79,6 +82,7 @@ namespace binary_tree
 		{
 			_insert3(root, t);
 		}
+		mCount++;
 	}
 
 	template<typename T>
@@ -90,7 +94,12 @@ namespace binary_tree
 	template<typename T>
 	bool BinaryTree<T>::del3(const T& t)
 	{
-		return _del3(root, t);
+		bool flag = _del3(root, t);
+		if(true == flag)
+		{
+			mCount--;
+		}
+		return flag;
 	}
 
 	template<typename T>
