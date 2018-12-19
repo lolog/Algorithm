@@ -13,6 +13,7 @@
 #include "Queue/Queue.cpp"
 #include "Matrix/Matrix.cpp"
 #include "GeneralList/GList.cpp"
+#include "Tree/Tree.cpp"
 
 using namespace std;
 using linear_list::LinearList;
@@ -20,6 +21,7 @@ using stack::Stack;
 using queue::Queue;
 using matrix::Matrix;
 using g_list::GList;
+using tree::Tree;
 
 int main()
 {
@@ -111,6 +113,18 @@ int main()
 			glist->generalList();
 		}
 		delete glist;
+	}
+
+	// List
+	index_list_ = str_func.find("Tree");
+	if(index_list_ != str_func.npos)
+	{
+		Tree* tree = new Tree();
+		if(0 == strcasecmp("BinaryTree", str_func.c_str()))
+		{
+			tree->binaryTree();
+		}
+		delete tree;
 	}
 
 	return 0;

@@ -60,4 +60,38 @@ struct Tuple
 	}
 };
 
+template<typename T>
+struct BTreeNode
+{
+	T val;
+
+	BTreeNode<T> *parent;
+	BTreeNode<T> *left;
+	BTreeNode<T> *right;
+
+	BTreeNode(T _val, BTreeNode<T>* _parent=NULL, BTreeNode<T>*_left=NULL, BTreeNode<T>* _right=NULL)
+	:parent(_parent), val(_val), left(_left), right(_right)
+	{
+	}
+};
+
+template<class T>
+struct Link
+{
+	T* ptr;
+
+	Link<T>* prev;
+	Link<T>* next;
+
+	Link()
+	:ptr(NULL),prev(NULL),next(NULL)
+	{
+	}
+
+	Link(T* ptr)
+	:ptr(ptr),prev(NULL),next(NULL)
+	{
+	}
+};
+
 #endif
