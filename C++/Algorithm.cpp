@@ -14,6 +14,7 @@
 #include "Matrix/Matrix.cpp"
 #include "GeneralList/GList.cpp"
 #include "Tree/Tree.cpp"
+#include "Heap/Heap.cpp"
 
 using namespace std;
 using linear_list::LinearList;
@@ -22,6 +23,7 @@ using queue::Queue;
 using matrix::Matrix;
 using g_list::GList;
 using tree::Tree;
+using heap::Heap;
 
 int main()
 {
@@ -125,6 +127,18 @@ int main()
 			tree->binaryTree();
 		}
 		delete tree;
+	}
+
+	// Heap
+	index_list_ = str_func.find("Heap");
+	if(index_list_ != str_func.npos)
+	{
+		Heap* heap = new Heap();
+		if(0 == strcasecmp("LinkHeap", str_func.c_str()))
+		{
+			heap->linkHeap();
+		}
+		delete heap;
 	}
 
 	return 0;
