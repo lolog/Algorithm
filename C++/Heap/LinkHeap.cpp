@@ -1,6 +1,6 @@
 #include <iostream>
-#include "../Common/TreeQueue.cpp"
 #include "LinkHeap.h"
+#include "../Common/TreeQueue.cpp"
 
 namespace link_heap
 {

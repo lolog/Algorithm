@@ -7,6 +7,7 @@
 namespace binary_tree
 {
 	using namespace std;
+
 	template<typename T>
 	class BinaryTree
 	{

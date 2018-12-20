@@ -1,5 +1,8 @@
 #include "TreeQueue.h"
 
+#ifndef __TREE_QUEUE_IMPL__
+#define __TREE_QUEUE_IMPL__
+
 namespace tree_queue
 {
 	template<typename T>
@@ -96,3 +99,6 @@ namespace tree_queue
 		curr = curr->rear;
 	}
 }
+
+#endif
+
